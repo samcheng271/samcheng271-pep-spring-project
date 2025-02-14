@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import com.example.entity.Account;
 import com.example.exception.*;
+import javax.security.sasl.AuthenticationException;
+
 @Service
 @Transactional
 public class AccountService {
@@ -31,4 +33,23 @@ public class AccountService {
         account.setAccountId(accInDB.getAccountId());
         return account;
     }
+
+    public Account loginAcc(Account account){
+        String user = account.getUsername();
+        String pass = account.getPassword();
+        Optional<Account> optionalAcc = accountRepo.findByUsernameAndPassword(user,pass);
+        if(optionalAcc.isPresent()){
+            Account acc = optionalAcc.get();
+            account.setAccountId(acc.getAccountId());
+            return account;
+        }
+        return null;
+    }
+    // public Account loginAcc(Account account) throws AuthenticationException{
+    //     String user = account.getUsername();
+    //     String pass = account.getPassword();
+    //     Account acc = accountRepo.findByUsernameAndPassword(user,pass).orElseThrow(() -> new AuthenticationException("User not found"));
+    //     account.setAccountId(acc.getAccountId());
+    //     return account;
+    // }
 }

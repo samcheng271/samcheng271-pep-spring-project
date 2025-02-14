@@ -22,12 +22,12 @@ import com.example.entity.Message;
 public class SocialMediaController {
 
     private AccountService accountService;
-    // private MessageService messageService;
+    private MessageService messageService;
 
     @Autowired
-    public SocialMediaController(AccountService accountService) {
+    public SocialMediaController(AccountService accountService, MessageService messageService) {
         this.accountService = accountService;
-        // this.messageService = messageService;
+        this.messageService = messageService;
     }
 
     @PostMapping("register")
@@ -40,5 +40,24 @@ public class SocialMediaController {
             return ResponseEntity.ok(registeredAcc);
         }
         return ResponseEntity.status(400).body(account);
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<Account> loginUserController (@RequestBody Account account){
+        Account loggedAccount = accountService.loginAcc(account);
+        if (loggedAccount!=null){
+            return ResponseEntity.ok(loggedAccount);
+        }
+        return ResponseEntity.status(401).body(account);
+    }
+
+    @PostMapping("messages")
+    public ResponseEntity<Message> newMessage (@RequestBody Message message){
+        Message createdMsg = messageService.newMessage(message);
+        if (createdMsg!=null){
+            return ResponseEntity.ok(createdMsg);
+        }
+        return ResponseEntity.status(400).body(message);
+
     }
 }
