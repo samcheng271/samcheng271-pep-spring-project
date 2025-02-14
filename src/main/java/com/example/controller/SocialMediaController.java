@@ -67,10 +67,20 @@ public class SocialMediaController {
     }
 
     @GetMapping("messages/{messageId}")
-    public ResponseEntity<Message> newMessage (@PathVariable String messageId){
+    public ResponseEntity<Message> msgOfMsgID (@PathVariable String messageId){
         return ResponseEntity.ok(messageService.msgOfID(Integer.parseInt(messageId)));
     }
 
+    @DeleteMapping("messages/{messageId}")
+    public ResponseEntity<Integer> delMessage (@PathVariable String messageId){
+        if(messageService.delMessage(Integer.parseInt(messageId))==1){
+        return ResponseEntity.status(200).body(1);
+
+        }
+
+        return ResponseEntity.status(200).build();
+
+    }
     // @GetMapping("accounts/{accountId}/messages")
     // public ResponseEntity<List<Message>> allMessagesOfUser (@PathVariable String accountId){
     //     return ResponseEntity.ok(messageService.allMessagesOfUser(accountId));

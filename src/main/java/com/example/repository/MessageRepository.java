@@ -14,6 +14,7 @@ public interface MessageRepository extends CrudRepository<Message,Integer> {
 
     Message findBymessageId(int msgId);
 
+    // void deleteBymessageId(int msgID);
     // @Query("SELECT m FROM Message m WHERE m.posted_by = :postedBy")
     // List<Message> findAllByPostedBy(@Param("postedBy") int postedBy);
     

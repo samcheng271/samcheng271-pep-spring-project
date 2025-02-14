@@ -37,10 +37,17 @@ public class MessageService {
         return (List)msgRepository.findAll();
     }
 
-    public Message msgOfID(int message_id) {
-        return msgRepository.findBymessageId(message_id);
+    public Message msgOfID(int msgID) {
+        return msgRepository.findBymessageId(msgID);
     }
 
+    public int delMessage(int msgID){
+        if(msgRepository.existsById(msgID)){
+            msgRepository.deleteById(msgID);
+            return 1;
+        }
+        return 0;
+    }
 
     // public List<Message> allMessagesOfUser (String user){
     //     // return msgRepository.findAllByPostedBy(Integer.parseInt(user));
