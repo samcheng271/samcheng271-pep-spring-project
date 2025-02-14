@@ -1,4 +1,8 @@
 package com.example.repository;
+import com.example.entity.Account;
 
-public interface AccountRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface AccountRepository extends CrudRepository<Account,Integer>{
+    boolean existsByUsername(String Username);
 }
