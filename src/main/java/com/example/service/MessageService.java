@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.repository.MessageRepository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
+import java.util.List;
+
 
 import com.example.entity.Message;
 import com.example.exception.*;
@@ -29,7 +31,9 @@ public class MessageService {
             msg.setMessageId(msgInDB.getMessageId());
             return msg;
         }
+    }
 
-        // return null;
+    public List<Message> allMessages (){
+        return (List)msgRepository.findAll();
     }
 }

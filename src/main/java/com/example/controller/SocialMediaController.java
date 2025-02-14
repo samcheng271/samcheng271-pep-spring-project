@@ -58,6 +58,11 @@ public class SocialMediaController {
             return ResponseEntity.ok(createdMsg);
         }
         return ResponseEntity.status(400).body(message);
+    }
+
+    @GetMapping("messages")
+    public ResponseEntity<List<Message>> allMessages (){
+        return ResponseEntity.ok(messageService.allMessages());
 
     }
 }
