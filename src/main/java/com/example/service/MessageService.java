@@ -61,7 +61,9 @@ public class MessageService {
             return 1;
         }
     }
-    // public List<Message> allMessagesOfUser (String user){
-    //     // return msgRepository.findAllByPostedBy(Integer.parseInt(user));
-    // }
+    public List<Message> allMessagesOfUser (String user){
+        // System.out.println("outofbounds::\n\n\n\n:"+msgRepository.findAllByPostedBy(Integer.parseInt(user)));
+
+        return msgRepository.findAllByPostedBy(Integer.parseInt(user));
+    }
 }
