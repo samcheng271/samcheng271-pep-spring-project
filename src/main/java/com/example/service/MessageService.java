@@ -36,4 +36,13 @@ public class MessageService {
     public List<Message> allMessages (){
         return (List)msgRepository.findAll();
     }
+
+    public Message msgOfID(int message_id) {
+        return msgRepository.findBymessageId(message_id);
+    }
+
+
+    // public List<Message> allMessagesOfUser (String user){
+    //     // return msgRepository.findAllByPostedBy(Integer.parseInt(user));
+    // }
 }
