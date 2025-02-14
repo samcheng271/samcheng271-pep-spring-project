@@ -24,7 +24,6 @@ public class MessageService {
 
     public Message newMessage(Message msg){
         if(msg.getMessageText().length()>255 || msg.getMessageText().isEmpty() || !msgRepository.findByPostedBy(msg.getPostedBy()).isPresent()){
-            // System.out.println("outofbounds::\n\n\n\n:");
             return null;
         } else{
             Message msgInDB = msgRepository.save(msg);
@@ -51,19 +50,15 @@ public class MessageService {
     public Integer updateMessage(Message newMsg, int msgId){
         Optional<Message> msgFound = msgRepository.findById(msgId);
         if(newMsg.getMessageText().length()>255 || newMsg.getMessageText().isEmpty() || !msgFound.isPresent()){
-            // System.out.println("outofbounds::\n\n\n\n:");
             return 0;
         } else{
             Message theMsg = msgFound.get();
             theMsg.setMessageText(newMsg.getMessageText());
             msgRepository.save(theMsg);
-            // msg.setMessageId(msgInDB.getMessageId());
             return 1;
         }
     }
     public List<Message> allMessagesOfUser (String user){
-        // System.out.println("outofbounds::\n\n\n\n:"+msgRepository.findAllByPostedBy(Integer.parseInt(user)));
-
         return msgRepository.findAllByPostedBy(Integer.parseInt(user));
     }
 }
