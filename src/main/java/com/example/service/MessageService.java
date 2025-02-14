@@ -48,7 +48,19 @@ public class MessageService {
         }
         return 0;
     }
-
+    public Integer updateMessage(Message newMsg, int msgId){
+        Optional<Message> msgFound = msgRepository.findById(msgId);
+        if(newMsg.getMessageText().length()>255 || newMsg.getMessageText().isEmpty() || !msgFound.isPresent()){
+            // System.out.println("outofbounds::\n\n\n\n:");
+            return 0;
+        } else{
+            Message theMsg = msgFound.get();
+            theMsg.setMessageText(newMsg.getMessageText());
+            msgRepository.save(theMsg);
+            // msg.setMessageId(msgInDB.getMessageId());
+            return 1;
+        }
+    }
     // public List<Message> allMessagesOfUser (String user){
     //     // return msgRepository.findAllByPostedBy(Integer.parseInt(user));
     // }

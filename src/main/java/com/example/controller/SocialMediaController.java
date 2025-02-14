@@ -75,10 +75,16 @@ public class SocialMediaController {
     public ResponseEntity<Integer> delMessage (@PathVariable String messageId){
         if(messageService.delMessage(Integer.parseInt(messageId))==1){
         return ResponseEntity.status(200).body(1);
-
         }
-
         return ResponseEntity.status(200).build();
+    }
+
+    @PatchMapping("messages/{messageId}")
+    public ResponseEntity<Integer> updateMessage (@PathVariable String messageId, @RequestBody Message message){
+        if(messageService.updateMessage(message, Integer.parseInt(messageId))==1)
+            return ResponseEntity.status(200).body(1);
+        
+        return ResponseEntity.status(400).build();
 
     }
     // @GetMapping("accounts/{accountId}/messages")
